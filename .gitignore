@@ -2,6 +2,7 @@
 
 # agregado por mi
 /postgress
+.env
 
 # dependencies
 /node_modules
