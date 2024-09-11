@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Todo {
+  id          String   @id @default(uuid())
+  description String
+  complete    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// esto lo podemos traer de una tabla existente con el npx prisma db pull
+// recordar generar el cliente de prisma npx prisma generate
+// si modificamos antes recordar hacer el npx prisma migrate dev
+// TENER CUIDADO YA QUE PURGAMOS LA BASE DE DATOS (en produccion ERROR GRAVE!!, en desarrollo no importa)
+// PARA SUBIR COSAS SIN ARRIESGARNOS A PURGAR TODA LA BASE DE DATOS
+// npx prisma db push - esto hace la sincronizacion de la base de datos solo que sin pasar por migraciones
+// model Employee {
+//   id        Int      @id @default(autoincrement())
+//   name      String   @db.VarChar
+//   lastName  String   @db.VarChar
+//   isAdmin   Boolean  @default(true)
+//   createdAt DateTime @default(now()) @db.Timestamp(6)
+//   roles     String[] @default([])
+// }
+
+// comente el modelo y ejecute 
+// npx prisma migrate dev
+// npx prisma generate
+// para volver a lo que teniamos
+// podemos ver los rollbacks tambien
