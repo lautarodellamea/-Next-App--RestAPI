@@ -2,8 +2,22 @@
 // no habra logica para mantener el estado o actualizarlo, solo llegaremos al endpoint y haremos la modificacion respectiva como si estuvieramos en postman
 
 
+// funcion para simular un tiempo
+/* const sleep = (seconds: number = 0): Promise<boolean> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true)
+    }, seconds * 1000);
+  })
+} */
+
+
+
 // modificar un todo
 export const updateTodo = async (id: string, complete: boolean) => {
+
+  // TODO:
+  // await sleep(2);
 
   const body = {
     complete: complete
@@ -49,12 +63,11 @@ export const createTodo = async (description: string) => {
 }
 
 // borrar completados
-export const deleteTodo = async () => {
+export const deleteCompletedTodo = async () => {
 
 
 
-  // si esto se ejecuta del lado del servidor debo poner el url completo http://localhost:3000/api/todos/${id}
-  // com lo ejecutaremos del lado del cliente puedo poner el url parcialmente
+
   const todo = await fetch(`/api/todos`, {
     method: 'DELETE',
     headers: {
@@ -64,6 +77,6 @@ export const deleteTodo = async () => {
 
   console.log(todo)
 
-  return todo
+  return true
 
 }

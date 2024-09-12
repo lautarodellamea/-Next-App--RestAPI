@@ -43,7 +43,7 @@ export const NewTodo = () => {
 
 
 
-    await todosApi.deleteTodo()
+    await todosApi.deleteCompletedTodo()
 
     route.refresh()
 
