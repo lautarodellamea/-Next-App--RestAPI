@@ -89,3 +89,33 @@ export async function POST(request: Request) {
 
 
 }
+
+
+// Borrar Todo
+
+export async function DELETE(request: Request) {
+
+
+  try {
+
+    const deleteTodos = await prisma.todo.deleteMany({
+      where: { complete: true },
+
+    })
+
+
+    return Response.json({
+      message: 'Borrados',
+      deleteTodos: deleteTodos,
+      method: request.method,
+    });
+  } catch (error) {
+
+
+    return Response.json({
+      error: error,
+    }, { status: 400 });
+  }
+
+
+}

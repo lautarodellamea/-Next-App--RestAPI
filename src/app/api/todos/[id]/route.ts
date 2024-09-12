@@ -63,13 +63,13 @@ export async function GET(request: Request, segments: Segments) {
 // modificar un todo por id
 
 const putSchema = yup.object({
-  description: yup.string().required(),
+  description: yup.string().optional(),
   complete: yup.boolean().optional(),
 })
 
 
 
-export async function POST(request: Request, segments: Segments) {
+export async function PUT(request: Request, segments: Segments) {
 
   // de aca sacaremos los params, y de ahi viene el id por ejemplo
   console.log({ segments })
