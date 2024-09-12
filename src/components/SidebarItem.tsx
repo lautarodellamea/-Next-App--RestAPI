@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useState } from "react"
 
 interface Props {
   icon: React.ReactNode
@@ -13,6 +14,9 @@ export const SidebarItem = ({ icon, path, title }: Props) => {
 
   const pathName = usePathname()
 
+  /* *** */
+  const [counter, setCounter] = useState(10)
+
   return (
     <li>
       <Link href={path} className={`
@@ -22,6 +26,8 @@ export const SidebarItem = ({ icon, path, title }: Props) => {
         {icon}
         <span className="-mr-1 font-medium">{title}</span>
       </Link>
+      {/* *** Este contador se utiliza para verificar que al hacer clic en él y luego agregar un nuevo "todo", el uso de `router.refresh` no realiza un refresco destructivo. En lugar de reiniciar todo el estado, solo actualiza lo que es necesario, preservando el estado del contador. */}
+      <span onClick={() => setCounter(counter + 1)} className="bg-sky-500 text-white p-1 cursor-pointer rounded">{counter}</span>
     </li>
   )
 }
