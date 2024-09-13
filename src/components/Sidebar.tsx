@@ -8,7 +8,7 @@ import { IoCalculatorOutline, IoCheckboxOutline, IoListOutline } from "react-ico
 const menuItem = [
   { title: "Dashboard", icon: <IoCalculatorOutline />, path: "/dashboard" },
   { title: "Rest Todos", icon: <IoCheckboxOutline />, path: "/dashboard/rest-todos" },
-  { title: "Server Actions", icon: <IoListOutline />, path: "/server-todos" }
+  { title: "Server Actions", icon: <IoListOutline />, path: "/dashboard/server-actions" }
 ]
 
 

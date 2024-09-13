@@ -1,16 +1,16 @@
 'use client';
 
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { IoTrashOutline } from "react-icons/io5";
-
-import * as todosApi from '@/todos/helpers/todos'
-
+// import * as todosApi from '@/todos/helpers/todos'
+import { addTodo, deleteCompleted } from "../actions/todo-actions";
 
 
 export const NewTodo = () => {
 
-  const route = useRouter()
+  // const route = useRouter()
+
 
   // para acceder y manejar el value del input
   const [description, setDescription] = useState("")
@@ -25,29 +25,23 @@ export const NewTodo = () => {
 
     if (description.trim().length === 0) return
 
-    const todo = await todosApi.createTodo(description)
+    // podriamos manejar un estado con loading, etc
+
+    // usamos el server action
+    addTodo(description)
     setDescription("")
-    console.log(todo)
 
 
-
-    route.refresh()
-
-
-
-    return todo
+    // del lado del servidor al usar los server actions debo usar el revalidatePath en el server action, si llamamos el revalidatePath del lado del cliente no funciona nos marcara un error
+    // route.refresh()
 
   }
+  /* 
+    const deleteCompleted = async () => {
+      // await todosApi.deleteCompletedTodo()
+      // route.refresh()
+    } */
 
-  const deleteCompleted = async () => {
-
-
-
-    await todosApi.deleteCompletedTodo()
-
-    route.refresh()
-
-  }
 
   return (
     <form onSubmit={onSubmit} className='flex w-full'>
@@ -64,6 +58,7 @@ export const NewTodo = () => {
       <span className='flex flex-1'></span>
 
       <button
+        // onClick={deleteCompleted} // cuando usamos server actions no funciona de esta forma - seccion 11 video 08
         onClick={() => deleteCompleted()}
         type='button' className="flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all">
         <IoTrashOutline />

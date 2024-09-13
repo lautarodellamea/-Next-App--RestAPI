@@ -1,5 +1,7 @@
-
+// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 // aprovechando Server Side Rendering de Next
 import prisma from "@/lib/prisma";
