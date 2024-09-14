@@ -8,6 +8,7 @@ const config: Config = {
 
     // recordar meter las carpetas que creemos 
     "./src/todos/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/products/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {

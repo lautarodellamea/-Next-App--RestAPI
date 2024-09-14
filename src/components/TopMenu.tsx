@@ -1,6 +1,28 @@
-import { CiBellOn, CiChat1, CiMenuBurger, CiSearch } from "react-icons/ci"
+import { cookies } from "next/headers";
+import Link from "next/link";
+import { CiMenuBurger, CiSearch, CiShoppingBasket } from "react-icons/ci"
 
 export const TopMenu = () => {
+
+
+  // como es un server component accedemos a las cookies asi
+  const cookieStore = cookies();
+  const cart = JSON.parse(cookieStore.get('cart')?.value ?? '{}')
+
+  const getTotalCount = (cart: { [id: string]: number }): number => {
+    let items = 0
+
+    Object.values(cart).forEach(value => {
+      items += value as number
+    })
+
+    return items
+  }
+
+  const totalItems = getTotalCount(cart)
+
+
+
   return (
     <div className="sticky z-10 top-0 h-16 border-b bg-white lg:py-2.5">
 
@@ -23,12 +45,27 @@ export const TopMenu = () => {
           <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 md:hidden">
             <CiSearch />
           </button>
-          <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
-            <CiChat1 size={25} />
-          </button>
-          <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
-            <CiBellOn size={25} />
-          </button>
+
+          <Link href="/dashboard/cart" className="flex items-center relative justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
+
+            {
+              totalItems > 0 ? (
+                <span className="absolute flex h-4 w-4 ml-8 -mt-8">
+                  <span className="animate-ping p-2 absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75 align-middle items-center justify-center"></span>
+                  <span className="relative inline-flex rounded-full h-4 w-4 bg-sky-500 text-[0.55rem] font-semibold justify-center items-center text-white">
+                    {totalItems}
+                  </span>
+                </span>
+              ) : (
+                <></>
+              )
+            }
+
+
+
+            <CiShoppingBasket size={25} />
+
+          </Link>
         </div>
       </div>
     </div>
